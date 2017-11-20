@@ -1,0 +1,78 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@media screen and (min-width: 480px) {
+  body {
+    padding: 2rem 20pt;
+  }
+}
+body {
+  background: lightgray;
+}
+
+.menu {
+    display: -webkit-flex;
+    /* Safari */
+    display: flex;
+}
+
+.spacer {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+ /*   color: greenyellow; */
+}
+
+.mainfab {
+  padding: 2pt;
+}
+.alert {
+  background: #f2edda;
+  padding: 7px;
+  font-size: .9em;
+  margin-bottom: 20px;
+  display: inline-block;
+  animation: 2s alertAnim forwards;
+}
+
+.ship-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+.link-btn /deep/ .mat-button-focus-overlay {
+  background-color:red;
+}
+
+.address-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.address-full-width {
+  width: 100%;
+}
+.right-align {
+  text-align: right;
+}
+
+mat-grid-tile {
+  background: lightblue;
+}
+.pay-box {
+  padding:10px 5px;
+  clear: left;
+  border: 3px solid red;
+}
+.high-box {
+  padding:10px 5px;
+  clear: left;
+  border: 2px solid lightblue;
+}
+/*
+.example-fill-remaining-space {
+// This fills the remaining space, by using flexbox.
+// Every toolbar row uses a flexbox row layout.
+flex: 1 1 auto;
+}
+*/

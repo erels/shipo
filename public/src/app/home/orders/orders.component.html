@@ -1,0 +1,59 @@
+<h3>
+  {{title}}
+  </h3>
+
+<div class="table-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ReciveDate">
+      <mat-header-cell *matHeaderCellDef> Recive Date </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.ReciveDate}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Weghit">
+      <mat-header-cell *matHeaderCellDef> Weghit </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Weghit}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Dimention">
+      <mat-header-cell *matHeaderCellDef> Dimentions </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Dimention}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ShipDate">
+      <mat-header-cell *matHeaderCellDef> Ship Date </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.ShipDate}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Carrier">
+      <mat-header-cell *matHeaderCellDef> Carrier </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Carrier}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Tracking">
+      <mat-header-cell *matHeaderCellDef> Tracking# </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Tracking}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Notes">
+      <mat-header-cell *matHeaderCellDef> Notes </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Notes}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+

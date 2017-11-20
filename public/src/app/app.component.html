@@ -1,0 +1,81 @@
+
+
+<mat-toolbar style="background-color: #03acf2">
+  <span style="color: red">Integrated</span>
+  <span style="color: black">Commerce</span>
+  <button mat-button [routerLink]="['']" class="mat-icon-button logo">
+    <img class="logo-image" src="./assets/commerceIntegratedCartLogo.png">
+  </button>
+  <span class="spacer"></span>
+
+  <span class="example-fill-remaining-space"></span>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <!--<button (click)="loginForm();" *ngIf="!(isLoggedIn)" md-menu-item>-->
+    <button (click)="openDialog();" *ngIf="!(isLoggedIn)" mat-menu-item>
+      <mat-icon>fingerprint</mat-icon>
+      <span>התחבר</span>
+    </button>
+    <button (click)="openRegister();" *ngIf="!(isLoggedIn)" mat-menu-item>
+      <mat-icon>subject</mat-icon>
+      <span>הרשם</span>
+    </button>
+    <button (click)="logout()" *ngIf="(isLoggedIn)" mat-menu-item>
+      <mat-icon>eject</mat-icon>
+      <span>התנתק</span>
+    </button>
+    <button [routerLink]="['profile']" *ngIf="(isLoggedIn)" mat-menu-item>
+      <mat-icon>face</mat-icon>
+      <span>פרופיל</span>
+    </button>
+    <button mat-menu-item disabled>
+      <mat-icon>announcement</mat-icon>
+      <span>צור קשר</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>notifications_off</mat-icon>
+      <span>התראות</span>
+    </button>
+  </mat-menu>
+  <!--<button (click)="openDialog();" mat-menu-item>
+    <mat-icon>lock open</mat-icon>
+    <span>Dialog</span>
+  </button>-->
+  <mat-toolbar-row>
+    <div *ngIf="(isLoggedIn)">
+      ברוך הבא {{username}}
+    </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+    <div *ngIf="(isLoggedIn)">
+    <div class="mainfab">
+      <button [routerLink]="['shiplist']" mat-raised-button color="primary"> הזמנות ממתינות למשלוח</button>
+      <button (click)="orderlist()" mat-raised-button color="primary"> הסטוריה הזמנות</button>
+      <div *ngIf="(isWhEmp)">
+        <button [routerLink]="['recive']" mat-raised-button color="primary"> Recive Shimpent</button>
+        <button [routerLink]="['ship']" mat-raised-button color="primary"> Ship Orders</button>
+      </div>
+    </div>
+    </div>
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+
+<app-home></app-home>
+
+<!--<md-card class="example-card" *ngFor="let data of (myData ? myData.slice(0,10): []); let i = index">
+
+    <img md-card-image src="{{ data.url }}">
+    <md-card-header>
+        <md-card-title>{{ data.title }}</md-card-title>
+    </md-card-header>
+
+    <md-card-actions>
+        <button md-button>LIKE</button>
+        <button md-button>SHARE</button>
+    </md-card-actions>
+
+</md-card>-->

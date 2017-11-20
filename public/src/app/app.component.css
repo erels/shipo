@@ -1,0 +1,17 @@
+.example-spacer {
+    padding: 350px;
+    color: red;
+}
+.md-button.logo {
+  height: 500rem;
+  width: 500rem;
+}
+
+.logo-image {
+  height: 100%;
+  width: 100%;
+  margin: 5px auto auto;
+  padding: 0;
+  display: inline-block;
+}
+

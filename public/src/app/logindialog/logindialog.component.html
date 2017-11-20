@@ -1,0 +1,29 @@
+<html dir="rtl">
+<h1 mat-dialog-title>התחבר:</h1>
+
+<div class="form-container">
+  <form [formGroup]="rForm" (ngSubmit)="login(rForm.value)">
+    <mat-form-field dir="ltr">
+      <input matInput placeholder="Email:" class="form-control" type="email" formControlName="username" #username>
+    </mat-form-field>
+    <div class="alert" *ngIf="!rForm.controls['username'].valid && rForm.controls['username'].touched">{{ titleAlert }}</div>
+    <br>
+
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Password" type=password formControlName="password">
+    </mat-form-field>
+
+    <div class="form-group">
+      <button type="submit" mat-raised-button disabled [disabled]="!rForm.valid"  color="primary">התחבר </button>
+
+      <a (click)="closeLogin()" mat-raised-button>בטל</a>
+      <!--<a (click)="openRester()" mat-raised-button>cancel</a>-->
+      <div class="alert" *ngIf="rForm.valid">{{ noConnection }}</div>
+
+
+    </div>
+
+    <br>
+  </form>
+</div>
+</html>

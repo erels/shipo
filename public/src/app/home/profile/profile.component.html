@@ -1,0 +1,96 @@
+<p>
+  וודא שהפרטים בפרופיל נכונים כדי שהחבילה תגיע אליך !!!!!
+</p>
+
+<div class="table-container mat-elevation-z8" *ngIf="(user)">
+
+<form [formGroup]="rForm" (ngSubmit)="updateProfileChange(rForm.value, i)">
+
+  <mat-accordion class="ship-headers-align" name="accordioni">
+
+    <mat-expansion-panel [expanded]="step === 0"  hideToggle="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h4> פרטים אישיים:</h4>
+        </mat-panel-title>
+        <mat-panel-description>
+          שם ואימייל
+          <mat-icon>perm_identity</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <input matInput placeholder="שם פרטי" class="form-control" name="fname" #fname formControlName="fname"
+               [(ngModel)]="user.fname">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="שם משפחה" class="form-control" name="lname" #lname formControlName="lname"
+               [(ngModel)]="user.lname">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="אימייל" class="form-control" name="email" #email formControlName="email"
+               [(ngModel)]="user.email">
+        <div style="color:red;" *ngIf="rForm.controls.email.hasError('pattern')">
+          פורמט אמייל לא נכון!
+        </div>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <input matInput placeholder="טלפון" class="form-control" name="phone" #phone formControlName="phone"
+               [(ngModel)]="user.phone">
+        <div style="color:red;" *ngIf="rForm.controls.phone.hasError('minlength')">
+          הכנס לפחות 10 ספרות
+        </div>
+        <div style="color:red;" *ngIf="rForm.controls.phone.hasError('pattern')">
+          הכנס רק ספרות
+        </div>
+      </mat-form-field>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 1"  hideToggle="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <!-- Destination -->
+          <h4>כתובת :</h4>
+        </mat-panel-title>
+        <mat-panel-description>
+             כתובת למשלוח
+          <mat-icon>map</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field class="address-full-width">
+        <input matInput placeholder="רחוב ומספר" class="form-control" name="address" #address
+               formControlName="address" [(ngModel)]="user.address">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="עיר" class="form-control" name="city" #city formControlName="city"
+               [(ngModel)]="user.city">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="מיקוד" class="form-control" name="zipcode" #zipcode formControlName="zipcode"
+               [(ngModel)]="user.zip">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="ארץ" class="form-control" name="country" #country formControlName="country"
+               [(ngModel)]="user.country">
+      </mat-form-field>
+
+    </mat-expansion-panel>
+
+
+  </mat-accordion>
+<br>
+  <div class="pay-box">
+  <button mat-raised-button type="submit" color="accent" [disabled]="rForm.invalid || !rForm.dirty">
+          שמור שינוי פרופיל
+  </button>
+  <br>
+    <div *ngIf="!rForm.dirty">
+    <div class="alert">{{ customMessage }}</div>
+    </div>
+  </div>
+</form>
+</div>

@@ -1,0 +1,96 @@
+<html dir="rtl">
+<h1 mat-dialog-title>הרשם:</h1>
+
+<form [formGroup]="rForm" (ngSubmit)="register(rForm.value)">
+  <div class="form-container">
+
+    <mat-horizontal-stepper>
+
+
+      <mat-step>
+
+        <ng-template matStepLabel>פרטים</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="שם פרטי" class="form-control" formControlName="fname" #fname>
+        </mat-form-field>
+        <div class="alert" *ngIf="!rForm.controls['fname'].valid && rForm.controls['fname'].touched && rForm.controls['fname'].dirty">{{ titleAlert }}</div>
+        <br>
+
+
+        <mat-form-field>
+          <input matInput placeholder="שם משפחה" class="form-control" formControlName="lname" #lname>
+        </mat-form-field>
+        <div class="alert" *ngIf="!rForm.controls['lname'].valid && rForm.controls['lname'].touched">{{ titleAlert }}</div>
+        <br>
+
+        <mat-form-field dir="ltr">
+          <input matInput placeholder="Email:" class="form-control" type="email" formControlName="username" #username>
+        </mat-form-field>
+        <!--<mat-error *ngIf="emailFormControl.hasError('pattern') || emailFormControl.hasError(required)  ">-->
+        <!--Please enter a valid email address-->
+        <!--</mat-error>-->
+        <div class="alert" *ngIf="!rForm.controls['username'].valid && rForm.controls['username'].touched">{{ titleAlert }}</div>
+        <br>
+
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Password" type=password formControlName="password" [(ngModel)]="password">
+        </mat-form-field>
+        <div class="alert" *ngIf="!rForm.controls['password'].valid && rForm.controls['password'].touched">{{ titleAlert }}</div>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Retype Password" type=password formControlName="passwordConfirm" [(ngModel)]="passwordConfirm">
+        </mat-form-field>
+        <div class="alert">{{ noPass }}</div>
+
+
+
+
+        <br>
+        <!--</form>-->
+        <div>
+
+          <button mat-button mdStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>כתובת</ng-template>
+        <!--<form>-->
+        <mat-form-field>
+          <input matInput placeholder="רחוב ומספר" class="form-control" name="address" #address formControlName="address">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="עיר" class="form-control" name="city" #city formControlName="city">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="מיקוד" class="form-control" name="zipcode" #zipcode formControlName="zipcode">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="ארץ" class="form-control" name="country" #country formControlName="country">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="טלפון" class="form-control" name="phone" #phone formControlName="phone">
+        </mat-form-field>
+
+        <div>
+          <button mat-button mdStepperPrevious>Back</button>
+
+        </div>
+
+      </mat-step>
+
+    </mat-horizontal-stepper>
+
+    <div class="form-group">
+      <button type="submit" mat-raised-button [disabled]="!rForm.valid" color="primary">הרשם</button>
+
+      <a (click)="closeLogin()" mat-raised-button>בטל</a>
+      <div class="alert" *ngIf="rForm.valid">{{ noConnection }}</div>
+    </div>
+
+
+
+
+  </div>
+</form>
+
+

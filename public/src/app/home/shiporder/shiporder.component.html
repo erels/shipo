@@ -1,0 +1,170 @@
+<h3>{{title}}</h3>
+
+<div class="table-container mat-elevation-z8" *ngIf="(dataSource)">
+
+  <div *ngFor="let order of dataSource; let i = index">
+
+
+    <mat-grid-list cols="5" rowHeight="6:1">
+      <mat-grid-tile>{{i+1}}</mat-grid-tile>
+      <mat-grid-tile>קבלה: {{order.ReciveDate}}</mat-grid-tile>
+      <mat-grid-tile>מקור: {{order.name}}</mat-grid-tile>
+      <mat-grid-tile>מידות החבילה: {{order.Dimention}}</mat-grid-tile>
+      <mat-grid-tile> משקל: {{order.Weghit}}</mat-grid-tile>
+    </mat-grid-list>
+    <mat-accordion class="ship-headers-align" name="i">
+      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h4>פרטי ההזמנה:</h4>
+            <!-- <h4>Order Details :</h4> -->
+          </mat-panel-title>
+          <mat-panel-description>
+            ערך ותאור המוצר עבור המכס
+            <mat-icon>shopping_cart'</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <form class="address-form" [formGroup]="sForm" (ngSubmit)="updateorderdesc(sForm.value,i)">
+
+          <mat-form-field>
+            <input matInput placeholder="הכנס ערך ההזמנה" class="form-control" type="number"
+                   formControlName="orderValue" name="orderValue"
+                   #orderValue value="{{ order.customerdeclarevalue }}">
+            <span matPrefix>$&nbsp;</span>
+          </mat-form-field>
+          <mat-form-field class="address-full-width">
+            <textarea id="orderDesc" name="orderDesc" matInput placeholder="הכנס תאור תכולת החבילה" class="form-control" formControlName="orderDesc"
+                   #orderDesc value="{{ order.customerdeclaretxt }}"matTextareaAutosize matAutosizeMinRows="1"  matAutosizeMaxRows="5"></textarea>
+          </mat-form-field>
+          <mat-action-row>
+
+            <button mat-raised-button type="submit" color="accent" [disabled]="sForm.valid">שמור פרטי ההזמנה
+            </button>
+          </mat-action-row>
+          <div class="alert">{{ customMessage }}</div>
+        </form>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <!-- Destination -->
+            <h4>כתובת למשלוח:</h4>
+          </mat-panel-title>
+          <mat-panel-description>
+            <!-- Type the country name -->
+            וודא שכתובת למשלוח נכונה!
+            <mat-icon>add_location</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <form class="address-form" [formGroup]="rForm" (ngSubmit)="updateAddressChange(rForm.value, i)">
+          <mat-form-field>
+            <input matInput placeholder="שם " class="form-control" formControlName="shiptoname" #shiptoname
+                   value={{order.shiptoname}}>
+          </mat-form-field>
+          <mat-form-field class="address-full-width">
+            <input matInput placeholder="רחוב ומספר" class="form-control" name="address" #address
+                   formControlName="address" value={{order.address}}>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="עיר" class="form-control" name="city" #city formControlName="city"
+                   value={{order.city}}>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="מיקוד" class="form-control" name="zipcode" #zipcode formControlName="zipcode"
+                   value={{order.zip}}>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="ארץ" class="form-control" name="country" #country formControlName="country"
+                   value={{order.country}}>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="טלפון" class="form-control" name="phone" #phone formControlName="phone"
+                   value={{order.phone}}>
+          </mat-form-field>
+          <mat-action-row>
+            <button mat-raised-button type="submit" color="accent" [disabled]="rForm.valid">שמור שינוי כתובת עבור המשלוח
+            </button>
+          </mat-action-row>
+          <div class="alert">{{ addressMessage }}</div>
+
+        </form>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step === 2" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title color="prime">
+            <h4>אפשריות משלוח:</h4>
+          </mat-panel-title>
+          <mat-panel-description>
+            בחר אופציות משלוח
+            <mat-icon>payment</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+
+        <mat-card>
+          <mat-button-toggle-group #group="matButtonToggleGroup" [(ngModel)]="groupsy[i]"
+                                   (change)="genderChanged($event.value,i)">
+            <mat-button-toggle value="0">
+              עדיין לא לשלוח
+            </mat-button-toggle>
+            <mat-button-toggle value="50">
+              עד 10 ימי עבודה: $50
+            </mat-button-toggle>
+            <mat-button-toggle value="30">
+              עד 30 ימי עבודה: $30
+            </mat-button-toggle>
+            <mat-button-toggle value="20">
+              עד 60 ימי עבודה: $20
+            </mat-button-toggle>
+            <mat-button-toggle value="15">
+              עד 90 ימי עבודה: $15
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </mat-card>
+        <!--<div class="example-selected-value">Selected value: {{group.value}} </div>-->
+
+
+        <mat-action-row>
+
+
+          <!--<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <table>
+              <tr><td><input type="hidden" name="on0" value="&#1488;&#1508;&#1513;&#1512;&#1497;&#1493;&#1514; &#1502;&#1513;&#1500;&#1493;&#1495;">&#1488;&#1508;&#1513;&#1512;&#1497;&#1493;&#1514; &#1502;&#1513;&#1500;&#1493;&#1495;</td></tr><tr><td><select name="os0">
+              <option value="7-10 &#1497;&#1502;&#1497; &#1506;&#1489;&#1493;&#1491;&#1492;">7-10 &#1497;&#1502;&#1497; &#1506;&#1489;&#1493;&#1491;&#1492; $70.00 USD</option>
+              <option value="&#1506;&#1491; 30 &#1497;&#1502;&#1497; &#1506;&#1489;&#1493;&#1491;&#1492;">&#1506;&#1491; 30 &#1497;&#1502;&#1497; &#1506;&#1489;&#1493;&#1491;&#1492; $50.00 USD</option>
+              <option value="&#1506;&#1491; 60 &#1497;&#1502;&#1497; &#1506;&#1489;&#1493;&#1491;&#1492;">&#1506;&#1491; 60 &#1497;&#1502;&#1497; &#1506;&#1489;&#1493;&#1491;&#1492; $30.00 USD</option>
+              <option value="&#1506;&#1491; 90 &#1497;&#1502;&#1497; &#1506;&#1489;&#1493;&#1491;&#1492;">&#1506;&#1491; 90 &#1497;&#1502;&#1497; &#1506;&#1489;&#1493;&#1491;&#1492; $20.00 USD</option>
+            </select> </td></tr>
+            </table>
+            <input type="hidden" name="currency_code" value="USD">
+            <input type="hidden" name="encrypted" value="-&#45;&#45;&#45;&#45;BEGIN PKCS7-&#45;&#45;&#45;&#45;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-&#45;&#45;&#45;&#45;END PKCS7-&#45;&#45;&#45;&#45;
+">
+            <input type="image" src="https://www.paypalobjects.com/he_IL/IL/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - הדרך הקלה והבטוחה יותר לשלם באינטרנט!">
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+          </form>-->
+        </mat-action-row>
+
+      </mat-expansion-panel>
+
+
+    </mat-accordion>
+    <br>
+
+  </div>
+
+
+</div>
+
+<div>
+  <div class="pay-box">
+  סכום לתשלום: {{ sumeofArray }}
+  </div>
+
+  <div id="paypal-button"></div>
+
+</div>

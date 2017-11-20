@@ -1,0 +1,53 @@
+
+<div dir="ltr" class="table-container mat-elevation-z8" *ngIf="(emaiList)">
+  <h3>Recieve Order:</h3>
+  <mat-card>
+
+    <form [formGroup]="rForm" (ngSubmit)="reciveOrder(rForm.value)">
+
+      <mat-form-field>
+        <!-- [formControl]="emailCtrl" -->
+        <input matInput type="text" placeholder="Customer name (email)" class="form-control" [formControl]="emailCtrl" formControlName="email" name="email"  [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let email of filteredOptions | async" [value]="email">
+            {{ email.email }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Sender ( Marketplace)" class="form-control" name="name" #name formControlName="name">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Weight -" class="form-control" name="weight" #weight formControlName="weight">
+        <span matSuffix>Kg</span>
+      </mat-form-field>
+      <div class="high-box">
+        <h4>Dimensions:</h4>
+        <img src="./assets/lwh.png" width="80" height="80">
+        <mat-form-field class="layout-dim-width">
+          <input matInput type="number" placeholder="L -"  name="lin" #lin formControlName="lin">
+          <span matSuffix> in.</span>
+        </mat-form-field>
+        X
+        <mat-form-field class="layout-dim-width">
+          <input matInput type="number" size="3" placeholder="W -" class="form-control" name="win" #win formControlName="win">
+          <span matSuffix> in.</span>
+        </mat-form-field>
+        X
+        <mat-form-field class="layout-dim-width">
+          <input matInput type="number" size="3" placeholder="H -" class="form-control" name="hin" #hin formControlName="hin">
+          <span matSuffix> in.</span>
+        </mat-form-field>
+      </div>
+      <mat-form-field class="address-full-width">
+            <textarea id="orderDesc" name="orderDesc" matInput placeholder="Receiving Notes (like packaged condition etc' " class="form-control" formControlName="orderDesc"
+                      matTextareaAutosize matAutosizeMinRows="1"  matAutosizeMaxRows="5"></textarea>
+      </mat-form-field>
+      <button mat-raised-button type="submit" color="accent" [disabled]="rForm.invalid || emailCtrl.invalid || !rForm.dirty">Save and insert another
+      </button>
+
+    </form>
+
+  </mat-card>
+
+</div>

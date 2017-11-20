@@ -1,0 +1,37 @@
+<!--<p>
+
+	  <br>
+	  	<input type="text" #username>
+	  <br>
+	  	<input type="password" #password>
+	  <br>
+	  <button (click)="login(username.value, password.value)">התחבר</button>
+</p>-->
+
+
+<p>
+  login works!
+  <button (click)="onNavigate()">Back</button>
+</p>
+<div class="form-container">
+<form [formGroup]="rForm" (ngSubmit)="login(rForm.value)">
+  <h2>התחבר:</h2>
+  <md-form-field dir="ltr" class="example-full-width">
+    <input mdInput placeholder="Email:" class="form-control" type="email" formControlName="username" #username>
+  </md-form-field>
+  <div class="alert" *ngIf="!rForm.controls['username'].valid && rForm.controls['username'].touched">{{ titleAlert }}</div>
+  <br>
+
+  <md-form-field class="example-full-width">
+    <input mdInput placeholder="Password" type=password formControlName="password">
+  </md-form-field>
+
+  <div class="form-group">
+    <button type="submit" md-raised-button disabled [disabled]="!rForm.valid"  color="primary">התחבר </button>
+    <!-- <input type="submit" class="button expanded" value="Submit Form" [disabled]="!rForm.valid" -->
+
+    <a [routerLink]="['/register']" md-raised-button>הירשם</a>
+  </div>
+
+</form>
+</div>
